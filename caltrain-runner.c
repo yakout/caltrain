@@ -16,6 +16,9 @@
 #include <pthread.h>
 
 #include "caltrain.h"
+#include "terminal_colors.h"
+
+extern int suppress_logs;
 
 // Count of passenger threads that have completed (i.e. station_wait_for_train
 // has returned) and are awaiting a station_on_board() invocation.
@@ -74,8 +77,12 @@ alarm_handler(int foo)
  * This creates a bunch of threads to simulate arriving trains and passengers.
  */
 int
-main()
+main(int argc, char **argv)
 {
+	if (argc > 1) {
+		suppress_logs = atoi(argv[1]);
+	}
+
 	struct station station;
 	station_init(&station);
 
@@ -180,7 +187,7 @@ main()
 	}
 
 	if (total_passengers_boarded == total_passengers) {
-		printf("Looks good!\n");
+		printf(ANSI_COLOR_GREEN "Looks good!" ANSI_COLOR_RESET "\n");
 		return 0;
 	} else {
 		// I don't think this is reachable, but just in case.
