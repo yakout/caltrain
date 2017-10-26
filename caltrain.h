@@ -3,6 +3,8 @@
 
 
 #include <pthread.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #include "terminal_colors.h"
 
@@ -10,6 +12,8 @@ struct station {
 	pthread_cond_t train_cond;
 	pthread_cond_t x;
 	pthread_mutex_t train_mutex;
+	pthread_mutex_t m1;
+	pthread_mutex_t m2;
 	int passengers_on_station; // num of passenger on station
 	int passengers_on_board; // num of passenger on train
 	int passengers_count; // num of passenger on tain + on station
