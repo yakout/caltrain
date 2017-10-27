@@ -19,7 +19,7 @@
 #include "terminal_colors.h"
 
 // Count of passenger threads that have completed (i.e. station_wait_for_train
-// has returned) and are awaiting a station_on_board() invocation.
+// has returned) and are awaiting a station_ogn_board() invocation.
 volatile int threads_completed = 0;
 
 void*
@@ -170,7 +170,7 @@ main(int argc, char **argv)
 		passengers_left -= threads_reaped;
 		total_passengers_boarded += threads_reaped;
 		printf("Train departed station with %d new passenger(s) (expected %d)%s\n",
-			threads_to_reap, threads_reaped,
+			threads_reaped, threads_to_reap,
 			(threads_to_reap != threads_reaped) ? " *****" : "");
 
 		if (threads_to_reap != threads_reaped) {
