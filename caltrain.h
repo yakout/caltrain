@@ -9,13 +9,11 @@
 #include "terminal_colors.h"
 
 struct station {
-	pthread_cond_t train_cond;
-	pthread_mutex_t train_mutex;
-	int passengers_on_station; // num of passenger on station
-	int passengers_on_board; // num of passenger on train
-	int passengers_count; // num of passenger on tain + on station
-	int free_seats;
-	int taken_seats;
+    pthread_mutex_t t_mutex;
+    pthread_cond_t train_move_cond, train_arrival_cond;
+    int waiting_passengers;
+    int free_seats;
+    int passengers_entered_train;
 };
 
 /**

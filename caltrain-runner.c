@@ -18,8 +18,6 @@
 #include "caltrain.h"
 #include "terminal_colors.h"
 
-extern int suppress_logs;
-
 // Count of passenger threads that have completed (i.e. station_wait_for_train
 // has returned) and are awaiting a station_on_board() invocation.
 volatile int threads_completed = 0;
@@ -79,9 +77,6 @@ alarm_handler(int foo)
 int
 main(int argc, char **argv)
 {
-	if (argc > 1) {
-		suppress_logs = atoi(argv[1]);
-	}
 
 	struct station station;
 	station_init(&station);
